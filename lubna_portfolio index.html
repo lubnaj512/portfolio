@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lubna Jalil — Computer Engineer</title>
+<meta name="description" content="Lubna Jalil — Computer Engineering graduate building full-stack apps and applied AI/embedded systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#F5F3ED;
+    --surface:#FFFFFF;
+    --surface-raised:#FFFFFF;
+    --hairline:#E2DED3;
+    --signal:#0E8C7F;
+    --signal-dim: rgba(14,140,127,0.18);
+    --beacon:#DB8A22;
+    --text:#181C22;
+    --muted:#5C6570;
+    --muted-dim:#8B939C;
+    --radius:10px;
+    --shadow: 0 1px 2px rgba(24,28,34,0.03), 0 8px 24px -12px rgba(24,28,34,0.08);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  ::selection{ background:var(--signal); color:#FFFFFF; }
+
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  .mono{
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--signal);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .eyebrow::before{
+    content:"";
+    width:16px;
+    height:1px;
+    background:var(--signal);
+    display:inline-block;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(245,243,237,0.78);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--hairline);
+  }
+  .nav-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:16px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-logo{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    color:var(--text);
+    letter-spacing:0.02em;
+  }
+  .nav-logo span{ color:var(--signal); }
+  .nav-links{
+    display:flex;
+    gap:28px;
+    list-style:none;
+  }
+  .nav-links a{
+    font-size:13px;
+    font-family:'JetBrains Mono', monospace;
+    color:var(--muted);
+    transition:color .25s ease;
+    position:relative;
+  }
+  .nav-links a:hover{ color:var(--text); }
+  .nav-cta{
+    font-size:13px;
+    font-family:'JetBrains Mono', monospace;
+    color:var(--signal);
+    border:1px solid var(--signal-dim);
+    padding:7px 14px;
+    border-radius:6px;
+    transition:all .25s ease;
+  }
+  .nav-cta:hover{ background:var(--signal); color:var(--ink); }
+  .nav-toggle{ display:none; }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:80px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:40px;
+    align-items:center;
+    width:100%;
+  }
+  .hero-copy .eyebrow{ margin-bottom:22px; }
+  .hero-copy h1{
+    font-size:clamp(38px, 5.4vw, 64px);
+    line-height:1.05;
+    margin-bottom:22px;
+  }
+  .hero-copy h1 .accent{ color:var(--signal); }
+  .hero-copy p{
+    font-size:17px;
+    color:var(--muted);
+    max-width:480px;
+    margin-bottom:32px;
+  }
+  .hero-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:13px 22px;
+    border-radius:7px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:all .25s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{
+    background:var(--signal);
+    color:var(--ink);
+    font-weight:500;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 30px -8px var(--signal-dim); }
+  .btn-ghost{
+    border-color:var(--hairline);
+    color:var(--text);
+  }
+  .btn-ghost:hover{ border-color:var(--signal); color:var(--signal); }
+
+  .hero-meta{
+    margin-top:44px;
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+  }
+  .hero-meta div{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--muted-dim);
+  }
+  .hero-meta div b{
+    display:block;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:22px;
+    color:var(--text);
+    font-weight:600;
+  }
+
+  /* Signature graph */
+  .graph-wrap{
+    position:relative;
+    aspect-ratio:1/1;
+    max-width:440px;
+    margin:0 auto;
+  }
+  .graph-wrap svg{ width:100%; height:100%; overflow:visible; }
+  .graph-edge{
+    stroke:var(--hairline);
+    stroke-width:1.5;
+    fill:none;
+  }
+  .graph-edge.active{
+    stroke:var(--signal);
+    stroke-dasharray:6 340;
+    stroke-dashoffset:0;
+    filter:drop-shadow(0 0 6px var(--signal-dim));
+    animation:trace 4.5s ease-in-out infinite;
+  }
+  @keyframes trace{
+    0%{ stroke-dashoffset:340; opacity:0; }
+    8%{ opacity:1; }
+    45%{ stroke-dashoffset:0; opacity:1; }
+    75%{ stroke-dashoffset:0; opacity:1; }
+    95%{ opacity:0; }
+    100%{ stroke-dashoffset:340; opacity:0; }
+  }
+  .graph-node{
+    fill:var(--surface-raised);
+    stroke:var(--hairline);
+    stroke-width:1.5;
+  }
+  .graph-node.pulse{ stroke:var(--signal); }
+  .graph-node.beacon{ stroke:var(--beacon); }
+  .graph-ping{
+    fill:none;
+    stroke:var(--signal);
+    stroke-width:1.5;
+    opacity:0;
+    transform-origin:center;
+    animation:ping 4.5s ease-in-out infinite;
+  }
+  @keyframes ping{
+    0%{ opacity:0; transform:scale(0.6); }
+    10%{ opacity:.7; }
+    30%{ opacity:0; transform:scale(1.9); }
+    100%{ opacity:0; transform:scale(1.9); }
+  }
+  .graph-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:9px;
+    fill:var(--muted);
+  }
+  .graph-label.hl{ fill:var(--signal); }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding:110px 0; border-top:1px solid var(--hairline); }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:56px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{ font-size:clamp(26px,3.2vw,36px); }
+  .section-head .note{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--muted-dim);
+    max-width:260px;
+    text-align:right;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- ABOUT ---------- */
+  .about-body{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+  }
+  .about-body p{
+    color:var(--muted);
+    font-size:16px;
+    margin-bottom:16px;
+  }
+  .about-body p:last-child{ margin-bottom:0; }
+  .about-body strong{ color:var(--text); font-weight:500; }
+
+  .fact-list{ list-style:none; }
+  .fact-list li{
+    display:flex;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid var(--hairline);
+    font-size:14px;
+  }
+  .fact-list li:first-child{ padding-top:0; }
+  .fact-list li span:first-child{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--muted-dim);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+  .fact-list li span:last-child{ color:var(--text); text-align:right; }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:36px 48px;
+  }
+  .skill-group .eyebrow{ margin-bottom:16px; font-size:11px; }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:9px; }
+  .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--muted);
+    border:1px solid var(--hairline);
+    padding:7px 12px;
+    border-radius:20px;
+    background:var(--surface);
+    transition:all .3s ease;
+    opacity:0;
+    transform:translateY(10px);
+  }
+  .tag.in{ opacity:1; transform:translateY(0); }
+  .tag:hover{
+    border-color:var(--signal);
+    color:var(--signal);
+    transform:translateY(-2px);
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-item{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:32px;
+    padding:28px 0;
+    border-bottom:1px solid var(--hairline);
+  }
+  .exp-item:first-child{ padding-top:0; }
+  .exp-item:last-child{ border-bottom:none; padding-bottom:0; }
+  .exp-date{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--muted-dim);
+  }
+  .exp-role h3{ font-size:19px; margin-bottom:4px; }
+  .exp-role .company{ color:var(--signal); font-size:14px; margin-bottom:14px; display:block; font-family:'JetBrains Mono', monospace; }
+  .exp-role ul{ padding-left:18px; color:var(--muted); font-size:14.5px; }
+  .exp-role ul li{ margin-bottom:8px; }
+  .exp-role ul li::marker{ color:var(--signal); }
+
+  /* ---------- FEATURED PROJECT ---------- */
+  .feature-card{
+    background:var(--surface);
+    border:1px solid var(--hairline);
+    border-radius:var(--radius);
+    padding:48px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .feature-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+    margin-bottom:24px;
+    flex-wrap:wrap;
+  }
+  .feature-top h3{ font-size:26px; margin-bottom:8px; }
+  .stack-line{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--beacon);
+  }
+  .feature-card > p{ color:var(--muted); max-width:640px; margin-bottom:32px; font-size:15.5px; }
+  .feature-list{ list-style:none; margin-bottom:36px; }
+  .feature-list li{
+    display:flex;
+    gap:12px;
+    color:var(--muted);
+    font-size:14.5px;
+    padding:8px 0;
+    align-items:flex-start;
+  }
+  .feature-list li::before{
+    content:"";
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--signal);
+    margin-top:7px;
+    flex-shrink:0;
+    box-shadow:0 0 8px var(--signal-dim);
+  }
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+    border-top:1px solid var(--hairline);
+    padding-top:32px;
+  }
+  .stat b{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:34px;
+    font-weight:700;
+    color:var(--text);
+    display:block;
+  }
+  .stat span{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--muted-dim);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+
+  /* ---------- PROJECTS GRID ---------- */
+  .proj-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:20px;
+  }
+  .proj-card{
+    background:var(--surface);
+    border:1px solid var(--hairline);
+    border-radius:var(--radius);
+    padding:28px;
+    box-shadow:var(--shadow);
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s ease, box-shadow .35s ease;
+  }
+  .proj-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--signal-dim);
+    box-shadow:0 16px 32px -16px rgba(24,28,34,0.14);
+  }
+  .proj-card .mono{ font-size:11px; color:var(--muted-dim); display:block; margin-bottom:12px; letter-spacing:.05em; }
+  .proj-card h3{ font-size:17px; margin-bottom:10px; }
+  .proj-card p{ color:var(--muted); font-size:14px; }
+
+  /* ---------- EDUCATION / CERTS ---------- */
+  .edu-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:50px;
+  }
+  .edu-item{ margin-bottom:28px; }
+  .edu-item:last-child{ margin-bottom:0; }
+  .edu-item h3{ font-size:17px; margin-bottom:4px; }
+  .edu-item .sub{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--muted-dim);
+    margin-bottom:8px;
+  }
+  .edu-item p{ color:var(--muted); font-size:14px; }
+  .cert-box{
+    background:var(--surface);
+    border:1px solid var(--hairline);
+    border-radius:var(--radius);
+    padding:24px;
+    box-shadow:var(--shadow);
+  }
+  .cert-box .eyebrow{ margin-bottom:16px; font-size:11px; }
+  .cert-box li{ list-style:none; font-size:14px; color:var(--muted); padding:10px 0; border-bottom:1px solid var(--hairline); }
+  .cert-box li:last-child{ border-bottom:none; padding-bottom:0; }
+  .cert-box li:first-of-type{ padding-top:0; }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    padding:100px 0 50px;
+    border-top:1px solid var(--hairline);
+  }
+  .contact-inner{ text-align:center; }
+  .contact-inner .eyebrow{ justify-content:center; margin-bottom:20px; }
+  .contact-inner h2{
+    font-size:clamp(32px,5vw,52px);
+    margin-bottom:24px;
+  }
+  .contact-inner h2 .accent{ color:var(--signal); }
+  .contact-links{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-top:36px;
+  }
+  .foot-bottom{
+    margin-top:90px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--muted-dim);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .graph-wrap{ max-width:320px; margin-top:20px; }
+    .about-body{ grid-template-columns:1fr; gap:32px; }
+    .skills-grid{ grid-template-columns:1fr; }
+    .exp-item{ grid-template-columns:1fr; gap:8px; }
+    .proj-grid{ grid-template-columns:1fr; }
+    .edu-grid{ grid-template-columns:1fr; gap:32px; }
+    .stat-row{ grid-template-columns:1fr; gap:18px; }
+    .feature-card{ padding:28px; }
+    section{ padding:76px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">LJ<span>.</span>dev</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">Computer Engineering · CUST '26</div>
+      <h1>Systems that find <span class="accent">their way</span> — from BLE beacons to full-stack apps.</h1>
+      <p>I'm Lubna Jalil, a Computer Engineering graduate who builds end-to-end: real-time navigation algorithms, production web apps, and applied ML. Currently seeking Software Engineering internships.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contact">Get in touch</a>
+        <a class="btn btn-ghost" href="#work">See my work ↓</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>163</b>nodes routed</div>
+        <div><b>700ms</b>live refresh</div>
+        <div><b>3</b>full-stack apps shipped</div>
+      </div>
+    </div>
+
+    <div class="graph-wrap" aria-hidden="true">
+      <svg viewBox="0 0 320 320">
+        <!-- edges -->
+        <path class="graph-edge" d="M40,260 L110,190" />
+        <path class="graph-edge active" d="M40,260 L110,190" style="animation-delay:0s" pathLength="340"/>
+        <path class="graph-edge" d="M110,190 L90,110" />
+        <path class="graph-edge active" d="M110,190 L90,110" style="animation-delay:1.1s" pathLength="340"/>
+        <path class="graph-edge" d="M90,110 L160,60" />
+        <path class="graph-edge active" d="M90,110 L160,60" style="animation-delay:2.2s" pathLength="340"/>
+        <path class="graph-edge" d="M160,60 L240,90" />
+        <path class="graph-edge active" d="M160,60 L240,90" style="animation-delay:3.3s" pathLength="340"/>
+        <path class="graph-edge" d="M110,190 L200,200" />
+        <path class="graph-edge" d="M200,200 L240,90" />
+        <path class="graph-edge" d="M200,200 L270,240" />
+        <path class="graph-edge" d="M40,260 L120,270" />
+        <path class="graph-edge" d="M120,270 L200,200" />
+
+        <!-- nodes -->
+        <g>
+          <circle class="graph-node pulse" cx="40" cy="260" r="7"/>
+          <circle class="graph-ping" cx="40" cy="260" r="7" style="animation-delay:0s"/>
+          <text class="graph-label hl" x="14" y="282">start</text>
+
+          <circle class="graph-node" cx="110" cy="190" r="5"/>
+          <circle class="graph-node" cx="90" cy="110" r="5"/>
+          <circle class="graph-node" cx="200" cy="200" r="5"/>
+          <circle class="graph-node" cx="270" cy="240" r="5"/>
+          <circle class="graph-node" cx="120" cy="270" r="5"/>
+
+          <circle class="graph-node beacon" cx="240" cy="90" r="7"/>
+          <circle class="graph-ping" cx="240" cy="90" r="7" style="animation-delay:3.3s; stroke:var(--beacon);"/>
+          <text class="graph-label hl" x="248" y="86" style="fill:var(--beacon)">swe intern</text>
+
+          <circle class="graph-node" cx="160" cy="60" r="5"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>About</h2>
+      <div class="note">// Computer Engineering, CUST — 2022 to 2026</div>
+    </div>
+    <div class="about-body">
+      <div class="reveal">
+        <p>I graduated with a <strong>BS in Computer Engineering</strong> from Capital University of Science &amp; Technology, Islamabad — a degree that sits right at the intersection of hardware and software, which is exactly where I like to build.</p>
+        <p>My final year project was a complete <strong>indoor navigation system</strong>: BLE beacon positioning, IMU sensor fusion, and A* pathfinding, running live on a 163-node campus graph. Since then I've been building production web apps as a <strong>Full Stack Developer at Proton Softtech</strong>, and I'm now pushing further into applied AI and agent-based systems.</p>
+        <p>I'm looking for a <strong>Software Engineering internship</strong> where I can keep building things that work end-to-end — not just the UI, not just the model, but the whole path between them.</p>
+      </div>
+      <ul class="fact-list reveal">
+        <li><span>Based in</span><span>Islamabad, Pakistan</span></li>
+        <li><span>Degree</span><span>BS Computer Engineering</span></li>
+        <li><span>University</span><span>CUST, 2022–2026</span></li>
+        <li><span>Focus</span><span>Full-Stack · Applied AI</span></li>
+        <li><span>Looking for</span><span>SWE Internships</span></li>
+        <li><span>Status</span><span style="color:var(--signal)">Open to work</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Experience</h2>
+      <div class="note">// Where I've shipped code that real people use</div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">2025</div>
+      <div class="exp-role">
+        <h3>Full Stack Developer</h3>
+        <span class="company">Proton Softtech</span>
+        <ul>
+          <li>Built and maintained full-stack web applications for real clients, including a Hotel Management System and a Hotel Booking Management platform — owned features end-to-end from database schema to UI.</li>
+          <li>Collaborated directly with client requirements to ship production-ready features, working across frontend and backend.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Featured Work</h2>
+      <div class="note">// Final Year Project</div>
+    </div>
+
+    <div class="feature-card reveal">
+      <div class="feature-top">
+        <div>
+          <h3>Indoor Navigation System</h3>
+          <span class="stack-line">React Native · BLE Beacons · Sensor Fusion · Firebase</span>
+        </div>
+      </div>
+      <p>An end-to-end indoor navigation system built for CUST campus — solving GPS-denied navigation by fusing BLE beacon proximity with IMU dead-reckoning, then routing users in real time with A* pathfinding.</p>
+      <ul class="feature-list">
+        <li>Designed and built the full pipeline: BLE beacon proximity detection + IMU-based sensor fusion for dead-reckoning positioning indoors, where GPS doesn't reach.</li>
+        <li>Implemented A* pathfinding over a 163-node, 165-edge campus graph to compute optimal real-time routes for users on the move.</li>
+        <li>Built a cross-platform mobile app in React Native with Zustand for state management, streaming live location updates at a 700ms refresh interval.</li>
+        <li>Integrated a Firebase/Firestore backend with a companion web admin dashboard for managing maps, beacons, and navigation data.</li>
+        <li>Collaborated with a 3-person team across sensing, algorithms, and app layers to deliver a fully working demo.</li>
+      </ul>
+      <div class="stat-row">
+        <div class="stat"><b class="count" data-target="163">0</b><span>Campus graph nodes</span></div>
+        <div class="stat"><b class="count" data-target="165">0</b><span>Graph edges mapped</span></div>
+        <div class="stat"><b class="count" data-target="700" data-suffix="ms">0</b><span>Live location refresh</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="other-work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Other Projects</h2>
+      <div class="note">// Smaller builds, same habit of shipping</div>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <span class="mono">PYTHON · OPENCV</span>
+        <h3>Real-Time Object Identification App</h3>
+        <p>A Python/OpenCV application for live object detection, processing camera input in real time.</p>
+      </div>
+      <div class="proj-card reveal">
+        <span class="mono">FLASK · SCIKIT-LEARN</span>
+        <h3>Network Intrusion Detection System</h3>
+        <p>A Flask web app that detects network intrusions in real time, trained on the NSL-KDD dataset.</p>
+      </div>
+      <div class="proj-card reveal">
+        <span class="mono">FULL-STACK</span>
+        <h3>Salon Management System</h3>
+        <p>A full-stack website for salon service and appointment booking, built for real client use.</p>
+      </div>
+      <div class="proj-card reveal">
+        <span class="mono">MICROSERVICES · DOCKER · K8S</span>
+        <h3>Cloud-Native University Management System</h3>
+        <p>A team project implementing scalable microservices with containerization and automated orchestration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Skills</h2>
+      <div class="note">// The stack I build with</div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <div class="eyebrow">Languages</div>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">C++</span><span class="tag">MATLAB</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="eyebrow">Web &amp; Mobile</div>
+        <div class="tag-row">
+          <span class="tag">React</span><span class="tag">React Native</span><span class="tag">Node.js</span><span class="tag">REST APIs</span><span class="tag">Firebase</span><span class="tag">Zustand</span><span class="tag">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="eyebrow">AI / ML &amp; Data</div>
+        <div class="tag-row">
+          <span class="tag">scikit-learn</span><span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">Flask</span><span class="tag">OpenCV</span><span class="tag">A* Pathfinding</span><span class="tag">Sensor Fusion</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="eyebrow">Tools</div>
+        <div class="tag-row">
+          <span class="tag">Git / GitHub</span><span class="tag">SQL</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Education &amp; Certifications</h2>
+      <div class="note">// The foundation</div>
+    </div>
+    <div class="edu-grid">
+      <div class="reveal">
+        <div class="edu-item">
+          <h3>BS Computer Engineering</h3>
+          <div class="sub">Capital University of Science &amp; Technology (CUST), Islamabad · 2022–2026</div>
+          <p>Final Year Project: Indoor Navigation System Using BLE Beacons (see Featured Work above). CGPA: 2.9</p>
+        </div>
+        <div class="edu-item">
+          <h3>ICS</h3>
+          <div class="sub">Punjab College · 2019–2021</div>
+          <p>75.64%</p>
+        </div>
+      </div>
+      <div class="cert-box reveal">
+        <div class="eyebrow">Certifications</div>
+        <ul>
+          <li>Full Stack Web Development — Coursera</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap contact-inner">
+    <div class="eyebrow">Let's talk</div>
+    <h2>Currently routing toward my next <span class="accent">internship</span>.</h2>
+    <div class="contact-links">
+      <a class="btn btn-primary" href="mailto:lubnajalil512@gmail.com">lubnajalil512@gmail.com</a>
+      <a class="btn btn-ghost" href="tel:+923349190715">+92 334 9190715</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/lubna-jalil-499b59240/" target="_blank" rel="noopener">LinkedIn</a>
+      
+    </div>
+    <div class="foot-bottom">
+      <span>Lubna Jalil © 2026</span>
+      <span>Islamabad, Pakistan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // Staggered skill tags
+  document.querySelectorAll('.skill-group').forEach(group => {
+    const tags = group.querySelectorAll('.tag');
+    const groupObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          tags.forEach((tag, i) => {
+            setTimeout(() => tag.classList.add('in'), i * 60);
+          });
+          groupObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    groupObserver.observe(group);
+  });
+
+  // Animated counters
+  const counters = document.querySelectorAll('.count');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now){
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
+</script>
+
+</body>
+</html>
